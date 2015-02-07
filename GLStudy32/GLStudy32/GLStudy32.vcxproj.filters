@@ -28,5 +28,11 @@
     <ClInclude Include="src\texture.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\pic_sb.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pic.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

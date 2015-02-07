@@ -13,6 +13,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "shader.h"
 #include "texture.hpp"
+#include "pic_sb.h"
+#include "pic.h"
 //#pragma comment(lib,"glew.lib")
 /************************************************************************/
 /* glDraw																*/
@@ -251,7 +253,8 @@ public:
 		m_matrixId = glGetUniformLocation(m_programId, "MVP");
 		m_colorId = glGetAttribLocation(m_programId, "vertexUV");
 		//add texture
-		m_texture = loadDDS("texture.dds");
+		//m_texture = loadDDS("texture.dds");
+		m_texture = loadData(ImageData::imgPic_1, sizeof(ImageData::imgPic_1), 128, 128);
 		m_textureID = glGetUniformLocation(m_programId, "myTextureSampler");
 
 		//create MVP
@@ -268,42 +271,42 @@ public:
 		glGenBuffers(1, &m_vetexId);
 		glBindBuffer(GL_ARRAY_BUFFER,m_vetexId);
 		static const GLfloat g_vertex_buff_data[] = {	
-			-1.0f, 1.0f, 1.0f,
+			-1.0f, 1.0f, 1.0f, //front
 			-1.0f, -1.0f, 1.0f,
 			1.0f, -1.0f, 1.0f,
 			1.0f, 1.0f, 1.0f,
 			-1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, -1.0f, // triangle 1 : begin
+			1.0f, -1.0f, 1.0f, //front end
+			1.0f, 1.0f, -1.0f, //back
+			1.0f, -1.0f, -1.0f,
+			-1.0f, -1.0f, -1.0f,
+			1.0f, 1.0f, -1.0f, 
+			-1.0f, -1.0f, -1.0f,
+			-1.0f, 1.0f, -1.0f, //back end
+			-1.0f, -1.0f, -1.0f, // left
 			-1.0f, -1.0f, 1.0f,
-			-1.0f, 1.0f, 1.0f, // triangle 1 : end
-			1.0f, 1.0f, -1.0f, // triangle 2 : begin
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, 1.0f, -1.0f, // triangle 2 : end
-			1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			-1.0f, -1.0f, -1.0f,
+			-1.0f, 1.0f, 1.0f,
 			-1.0f, -1.0f, -1.0f,
 			-1.0f, 1.0f, 1.0f,
-			-1.0f, 1.0f, -1.0f,
+			-1.0f, 1.0f, -1.0f, // left end	
+			1.0f, 1.0f, 1.0f, //right
+			1.0f, -1.0f, -1.0f,
+			1.0f, 1.0f, -1.0f,
+			1.0f, -1.0f, -1.0f,
+			1.0f, 1.0f, 1.0f,
+			1.0f, -1.0f, 1.0f, //right end
+			1.0f, -1.0f, 1.0f, //down
+			-1.0f, -1.0f, -1.0f,
+			1.0f, -1.0f, -1.0f,				
 			1.0f, -1.0f, 1.0f,
 			-1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, -1.0f,			
-			1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f,
+			-1.0f, -1.0f, -1.0f, //down end		
+			1.0f, 1.0f, 1.0f, //up
 			1.0f, 1.0f, -1.0f,
 			-1.0f, 1.0f, -1.0f,
 			1.0f, 1.0f, 1.0f,
 			-1.0f, 1.0f, -1.0f,
-			-1.0f, 1.0f, 1.0f		
+			-1.0f, 1.0f, 1.0f	//up end	
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buff_data), g_vertex_buff_data, GL_STATIC_DRAW);
 
@@ -317,36 +320,36 @@ public:
 			1.000000f, 0.000000f,
 			0.000000f, 0.000000f,
 			1.000000f, 1.000000f,
-			0.000059f, 1.0f - 0.000004f,
-			0.000103f, 1.0f - 0.336048f,
-			0.335973f, 1.0f - 0.335903f,
-			1.000023f, 1.0f - 0.000013f,
-			0.667979f, 1.0f - 0.335851f,
-			0.999958f, 1.0f - 0.336064f,
-			0.667979f, 1.0f - 0.335851f,
-			0.336024f, 1.0f - 0.671877f,
-			0.667969f, 1.0f - 0.671889f,
-			1.000023f, 1.0f - 0.000013f,
-			0.668104f, 1.0f - 0.000013f,
-			0.667979f, 1.0f - 0.335851f,
-			0.000059f, 1.0f - 0.000004f,
-			0.335973f, 1.0f - 0.335903f,
-			0.336098f, 1.0f - 0.000071f,
-			0.667979f, 1.0f - 0.335851f,
-			0.335973f, 1.0f - 0.335903f,
-			0.336024f, 1.0f - 0.671877f,			
-			0.668104f, 1.0f - 0.000013f,
-			0.335973f, 1.0f - 0.335903f,
-			0.667979f, 1.0f - 0.335851f,
-			0.335973f, 1.0f - 0.335903f,
-			0.668104f, 1.0f - 0.000013f,
-			0.336098f, 1.0f - 0.000071f,
-			0.000103f, 1.0f - 0.336048f,
-			0.000004f, 1.0f - 0.671870f,
-			0.336024f, 1.0f - 0.671877f,
-			0.000103f, 1.0f - 0.336048f,
-			0.336024f, 1.0f - 0.671877f,
-			0.335973f, 1.0f - 0.335903f					
+			1.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			0.000000f, 1.000000f,
+			1.000000f, 0.000000f,
+			0.000000f, 1.000000f,
+			0.000000f, 0.000000f,
+			0.000000f, 1.000000f,
+			1.000000f, 1.000000f,
+			1.000000f, 0.000000f,
+			0.000000f, 1.000000f,			
+			1.000000f, 0.000000f,
+			0.000000f, 0.000000f,
+			0.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			1.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			0.000000f, 0.000000f,
+			0.000000f, 1.000000f,
+			1.000000f, 1.000000f,
+			0.000000f, 0.000000f,
+			1.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			0.000000f, 1.000000f,
+			0.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			1.000000f, 0.000000f,
+			0.000000f, 0.000000f,
+			1.000000f, 1.000000f,
+			0.000000f, 0.000000f,
+			0.000000f, 1.000000f
 		};
 		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buff_data1), g_vertex_buff_data1, GL_STATIC_DRAW);
 
@@ -354,7 +357,7 @@ public:
 	}
 	void actionUpdate()
 	{
-		return;
+		//return;
 		Model = glm::rotate(Model, 0.001f, glm::vec3(1, 1, 1));
 		//Model = glm::translate(Model, glm::vec3(0.01f, 0, 0));		
 		m_MVP = projection*View*Model;
@@ -407,7 +410,8 @@ private:
 	GLuint m_vertexPos_modelspaceID1;*/
 };
 
-int main(void)
+int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+//int main(void)
 {
 	if (!glfwInit()){ //init glfw	
 		fprintf(stderr, "Failed to init glfw!");
