@@ -11,6 +11,8 @@
 #include <gl/gl.h>
 #include "MDrawColorBox.h"
 #include "MDrawTextureBox.h"
+#include "lua.hpp"
+#include <string>
 
 //#pragma comment(lib,"glew.lib")
 /************************************************************************/
@@ -19,10 +21,54 @@
 /* update draw:1.Enable draw point 2.Bind buff 3.Set point property		*/
 /*			   4.draw point 5.Disable draw point						*/
 /************************************************************************/
-
-int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-//int main(void)
+lua_State* L = NULL;
+void closeLua()
 {
+	if (L)
+	{
+		lua_close(L);
+	}
+}
+
+void initLua()
+{
+	L = luaL_newstate();
+	if (luaL_loadfile(L, "./setting.lua") || lua_pcall(L, 0, 0, 0))
+	{
+		printf("LUA ERROR:%s", lua_tostring(L, -1));
+		closeLua();
+		L = NULL;
+		return;
+	}
+}
+
+void getInfo(int& w, int& h, std::string& title)
+{
+	if (!L)
+		return;
+	
+	lua_getglobal(L, "globle_info");	
+	lua_getfield(L, -1, "width");
+	w = (int)lua_tonumber(L, -1);
+	lua_pop(L, 1);
+	lua_getfield(L, -1, "height");
+	h = (int)lua_tonumber(L, -1);	
+	lua_pop(L, 1);
+	lua_getfield(L, -1, "title");
+	title = (char*)lua_tostring(L, -1);
+	lua_pop(L, 1);	
+	lua_pop(L, 1);
+}
+
+//int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
+int main(void)
+{
+	//init lua
+	initLua();
+	int width = 300, height = 300;
+	std::string title = "TEST";
+	getInfo(width, height, title);
+
 	if (!glfwInit()){ //init glfw	
 		fprintf(stderr, "Failed to init glfw!");
 		return -1;
@@ -32,7 +78,7 @@ int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	
 	//create a openGL window
-	GLFWwindow* window = glfwCreateWindow(300, 300, "TEST", NULL, NULL); 
+	GLFWwindow* window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 	if (!window) {		
 		fprintf(stderr, "Failed to create glfw window!");
 		glfwTerminate();
@@ -66,6 +112,7 @@ int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 		Sleep(1);
 	}
 	delete glDraw;
+	closeLua();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;

@@ -9,6 +9,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="liblua">
+      <UniqueIdentifier>{e5aa8c69-a4f2-4240-81a4-baa1c3ab8a6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -32,6 +35,102 @@
     <ClCompile Include="src\pic_sb.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="liblua\lapi.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lauxlib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lbaselib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lbitlib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lcode.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lcorolib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lctype.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ldblib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ldebug.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ldo.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ldump.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lfunc.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lgc.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\linit.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\liolib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\llex.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lmathlib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lmem.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\loadlib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lobject.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lopcodes.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\loslib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lparser.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lstate.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lstring.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lstrlib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ltable.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ltablib.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\ltm.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lundump.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lvm.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
+    <ClCompile Include="liblua\lzio.c">
+      <Filter>liblua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader.h">
@@ -51,6 +150,81 @@
     </ClInclude>
     <ClInclude Include="src\MDrawTextureBox.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lapi.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lauxlib.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lcode.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lctype.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\ldebug.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\ldo.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lfunc.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lgc.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\llex.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\llimits.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lmem.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lobject.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lopcodes.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lparser.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lstate.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lstring.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\ltable.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\ltm.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lua.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lua.hpp">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\luaconf.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lualib.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lundump.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lvm.h">
+      <Filter>liblua</Filter>
+    </ClInclude>
+    <ClInclude Include="liblua\lzio.h">
+      <Filter>liblua</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
