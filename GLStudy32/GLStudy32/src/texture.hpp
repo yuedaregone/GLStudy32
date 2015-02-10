@@ -14,4 +14,7 @@ GLuint loadDDS(const char * imagepath);
 
 // Load Data
 GLuint loadData(void* _data, size_t _size, size_t _width, size_t _height);
+
+//set testure 
+void setTextureParameteri();
 #endif

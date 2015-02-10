@@ -20,6 +20,18 @@
     <ClCompile Include="src\texture.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\MDrawColorBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MDrawTextureBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pic.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pic_sb.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader.h">
@@ -28,10 +40,16 @@
     <ClInclude Include="src\texture.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\pic_sb.h">
+    <ClInclude Include="src\pic.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\pic.h">
+    <ClInclude Include="src\MGraphicsProtocol.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MDrawColorBox.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MDrawTextureBox.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
