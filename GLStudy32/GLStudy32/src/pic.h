@@ -5,5 +5,6 @@ namespace ImageData
 {
 	extern unsigned char imgPic_1[];
 	extern unsigned char imgPic_2[];
+	extern unsigned char imgPic_sb[];
 }
 #endif

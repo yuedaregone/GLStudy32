@@ -3,6 +3,15 @@
 #include "texture.hpp"
 #include "pic.h"
 #include "MDrawColorBox.h"
+#include "MActionSimple.h"
+
+MDrawColorBox::MDrawColorBox()
+{
+	m_vetexId = 0;
+	m_vetexId1 = 0;
+	m_programId = 0;
+	m_objAction = new MActionSimple();
+};
 
 void MDrawColorBox::shaderInit()
 {
@@ -30,13 +39,7 @@ void MDrawColorBox::shaderInit()
 	m_matrixId = glGetUniformLocation(m_programId, "MVP");
 	m_colorId = glGetAttribLocation(m_programId, "vertexColor");
 	//create MVP
-	projection = glm::perspective(45.0f, 1.0f/1.0f, 0.1f, 100.0f);
-	View = glm::lookAt(
-		glm::vec3(0, 0, 6), // Camera is at (4,3,3), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-		);
-	Model = glm::mat4(1.0f);		
+	m_objAction->initMatrix();
 }
 void MDrawColorBox::drawInit()
 {
@@ -134,9 +137,7 @@ void MDrawColorBox::drawUpdate()
 {		
 	glUseProgram(m_programId);
 				
-	Model = glm::rotate(Model, 0.01f, glm::vec3(1, 1, 1));
-	//Model = glm::translate(Model, glm::vec3(0.01f, 0, 0));		
-	m_MVP = projection*View*Model;
+	m_MVP = m_objAction->getMVP();
 	glUniformMatrix4fv(m_matrixId, 1, GL_FALSE, &m_MVP[0][0]);
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(m_vertexPos_modelspaceID);

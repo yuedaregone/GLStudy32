@@ -5,16 +5,12 @@
 #include <GL/glew.h>
 #include <GL/glfw3.h>
 #include <gl/gl.h>
+#include "MObjActionProtocol.h"
 
 class MDrawColorBox : public MGraphicsProtocol
 {
 public:
-	MDrawColorBox()
-	{
-		m_vetexId = 0;
-		m_vetexId1 = 0;
-		m_programId = 0;
-	};
+	MDrawColorBox();
 	~MDrawColorBox() {};
 	virtual void shaderInit();
 	virtual void drawInit();	
@@ -28,9 +24,7 @@ private:
 	GLuint m_colorId;
 	GLuint m_texture;
 	GLuint m_textureID;
-	glm::mat4 projection;
-	glm::mat4 View;
-	glm::mat4 Model;
+	MObjActionProtocol* m_objAction;
 	glm::mat4 m_MVP;
 };
 
