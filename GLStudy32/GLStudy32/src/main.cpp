@@ -26,7 +26,8 @@
 int main(void)
 {
 	//init lua
-	g_pLuaConfig->initLua();
+	g_pLuaConfig->initLua();	
+
 	int width = 300, height = 300;
 	std::string title = "TEST";
 	if (g_pLuaConfig->isExit())

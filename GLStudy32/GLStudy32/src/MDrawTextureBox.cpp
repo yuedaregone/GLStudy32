@@ -3,6 +3,7 @@
 #include "pic.h"
 #include "MDrawTextureBox.h"
 #include "MActionSimple.h"
+#include "LuaConfig.h"
 
 MDrawTextureBox::MDrawTextureBox()
 {
@@ -33,8 +34,20 @@ void MDrawTextureBox::shaderInit()
 			void main(){											\n\
 				gl_FragColor = texture2D(myTextureSampler,UV);		\n\
 			}														\n\
-		";		
-		m_programId = loadShaders(verStr, fragStr);
+		";	
+		if (g_pLuaConfig->isExit())
+		{
+			std::string vertex = g_pLuaConfig->getVertexStr();
+			std::string fragment = g_pLuaConfig->getFragmentStr();
+			if (!vertex.empty() && !fragment.empty())
+			{
+				m_programId = loadShaders(vertex.c_str(), fragment.c_str());
+			}			
+		}
+		else
+		{
+			m_programId = loadShaders(verStr, fragStr);
+		}		
 		m_vertexPos_modelspaceID = glGetAttribLocation(m_programId, "vertexPosition_modelspace");
 		m_matrixId = glGetUniformLocation(m_programId, "MVP");
 		m_colorId = glGetAttribLocation(m_programId, "vertexUV");

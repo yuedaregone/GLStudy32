@@ -1,4 +1,5 @@
 #include "LuaConfig.h"
+#include <assert.h>
 
 LuaConfig* LuaConfig::m_instance = NULL;
 
@@ -31,8 +32,7 @@ void LuaConfig::initLua()
 
 void LuaConfig::getInfo(int& w, int& h, std::string& title)
 {
-	if (!m_L)
-		return;
+	assert(m_L && "lua must be hava a value!");	
 
 	lua_getglobal(m_L, "globle_info");
 	lua_getfield(m_L, -1, "width");
@@ -49,8 +49,8 @@ void LuaConfig::getInfo(int& w, int& h, std::string& title)
 
 void LuaConfig::getRGBA(float& r, float& g, float& b, float& a)
 {
-	if (!m_L)
-		return;
+	assert(m_L && "lua must be hava a value!");
+
 	lua_getglobal(m_L, "bg_color");
 	lua_getfield(m_L, -1, "r");
 	r = (float)lua_tonumber(m_L, -1);
@@ -65,4 +65,33 @@ void LuaConfig::getRGBA(float& r, float& g, float& b, float& a)
 	a = (float)lua_tonumber(m_L, -1);
 	lua_pop(m_L, 1);
 	lua_pop(m_L, 1);
+}
+
+std::string LuaConfig::getVertexStr()
+{
+	assert(m_L && "lua must be hava a value!");
+
+	lua_getglobal(m_L, "getVertexShader");
+	lua_pcall(m_L, 0, -1, 0);
+	const char* temp = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+	return temp;
+}
+
+std::string LuaConfig::getFragmentStr()
+{
+	assert(m_L && "lua must be hava a value!");
+
+	lua_getglobal(m_L, "getFragmentShader");
+	lua_pcall(m_L, 0, -1, 0);
+	const char* temp = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+	return temp;
+}
+
+int LuaConfig::getStackNum()
+{
+	assert(m_L && "lua must be hava a value!");
+
+	return lua_gettop(m_L);
 }
