@@ -41,6 +41,12 @@
     <ClCompile Include="src\LuaConfig.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="GLSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShaderProgram.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader.h">
@@ -68,6 +74,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\LuaConfig.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GLShaderProgram.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

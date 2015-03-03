@@ -13,6 +13,11 @@ MDrawTextureBox::MDrawTextureBox()
 	m_objAction = new MActionSimple();
 };
 
+MDrawTextureBox::~MDrawTextureBox()
+{
+	delete m_objAction;
+}
+
 void MDrawTextureBox::shaderInit()
 {
 	const char* verStr = "\

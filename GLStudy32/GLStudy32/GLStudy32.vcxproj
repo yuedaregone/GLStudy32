@@ -78,6 +78,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLShaderProgram.cpp" />
+    <ClCompile Include="GLSprite.cpp" />
     <ClCompile Include="src\LuaConfig.cpp" />
     <ClCompile Include="src\MActionSimple.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -90,6 +92,8 @@
     <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GLShaderProgram.h" />
+    <ClInclude Include="GLSprite.h" />
     <ClInclude Include="src\LuaConfig.h" />
     <ClInclude Include="src\MActionSimple.h" />
     <ClInclude Include="src\MDrawColorBox.h" />

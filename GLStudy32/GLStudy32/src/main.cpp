@@ -14,6 +14,7 @@
 #include "lua.hpp"
 #include <string>
 #include "LuaConfig.h"
+#include "GLSprite.h"
 
 //#pragma comment(lib,"glew.lib")
 /************************************************************************/
@@ -62,16 +63,24 @@ int main(void)
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 	
-	MGraphicsProtocol* glDraw = new MDrawTextureBox(); //gl draw class
-	glDraw->shaderInit();
-	glDraw->drawInit();
+	//MGraphicsProtocol* glDraw = new MDrawTextureBox(); //gl draw class
+	//glDraw->shaderInit();
+	//glDraw->drawInit();
 	
+	GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
+	sp->setPosition(150, 150);
+
+	GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
+	sp1->setPosition(25, 25);
+
 	bool isRun  = true;
 	while (isRun) { //gl draw main loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	//clear color	
 		
-		glDraw->actionUpdate();
-		glDraw->drawUpdate(); //gl draw update
+		//glDraw->actionUpdate();
+		//glDraw->drawUpdate(); //gl draw update
+		sp->draw();
+		sp1->draw();
 		
 		glfwSwapBuffers(window);
 		isRun = GLFW_PRESS != glfwGetKey(window, GLFW_KEY_ESCAPE)
@@ -79,7 +88,7 @@ int main(void)
 		glfwPollEvents();
 		Sleep(1);
 	}
-	delete glDraw;
+	//delete glDraw;
 	g_pLuaConfig->closeLua();
 	glfwDestroyWindow(window);
 	glfwTerminate();

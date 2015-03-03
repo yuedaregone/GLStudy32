@@ -11,7 +11,7 @@ class MDrawTextureBox : public MGraphicsProtocol
 {
 public:
 	MDrawTextureBox();
-	~MDrawTextureBox() {};
+	~MDrawTextureBox();
 	virtual void shaderInit();
 	virtual void drawInit();	
 	virtual void actionUpdate();	

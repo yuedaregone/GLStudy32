@@ -14,10 +14,15 @@ public:
 	std::string getVertexStr();
 	std::string getFragmentStr();
 	int getStackNum();
+public:
+	void getWindowSize(int& w, int& h);
 private:
-	LuaConfig() : m_L(NULL) {}	
+	LuaConfig() : m_L(NULL), m_width(-1), m_height(-1){}
 	lua_State* m_L;
 	static LuaConfig* m_instance;
+private:
+	int m_width;
+	int m_height;
 };
 
 #define g_pLuaConfig LuaConfig::getInstance()

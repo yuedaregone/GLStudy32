@@ -45,6 +45,9 @@ void LuaConfig::getInfo(int& w, int& h, std::string& title)
 	title = (char*)lua_tostring(m_L, -1);
 	lua_pop(m_L, 1);
 	lua_pop(m_L, 1);
+
+	m_width = w;
+	m_height = h;
 }
 
 void LuaConfig::getRGBA(float& r, float& g, float& b, float& a)
@@ -94,4 +97,20 @@ int LuaConfig::getStackNum()
 	assert(m_L && "lua must be hava a value!");
 
 	return lua_gettop(m_L);
+}
+
+/************************************************************/
+
+void LuaConfig::getWindowSize(int& w, int& h)
+{
+	if (m_width < 0 || m_height < 0)
+	{
+		std::string temp;
+		getInfo(w, h, temp);
+	}
+	else
+	{
+		w = m_width;
+		h = m_height;
+	}
 }

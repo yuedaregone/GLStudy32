@@ -49,7 +49,7 @@ local texture_shader = {
         varying vec2 UV;                                                \n\
         uniform sampler2D myTextureSampler;                             \n\
         void main(){                                                    \n\
-            vec4 texColor = texture2D(myTextureSampler,UV);             \n\            
+            vec4 texColor = texture2D(myTextureSampler,UV);             \n\
             gl_FragColor = vec4(1.0,texColor.g,texColor.b,texColor.a);  \n\
         }                                                               \n\
     ",
@@ -60,5 +60,5 @@ function getVertexShader()
 end
 
 function getFragmentShader()
-    return texture_shader.fragment_gray_str
+    return texture_shader.fragment_str
 end
