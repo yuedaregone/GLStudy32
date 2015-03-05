@@ -1,6 +1,7 @@
 #include "shader.h"
 #include <stdio.h>
 #include <iostream>
+#include <string.h>
 GLuint loadShaders(const char* vertexStr, const char* fragmentStr)
 {
 	//Create the shaders

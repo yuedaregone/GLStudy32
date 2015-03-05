@@ -17,9 +17,69 @@
     <ClCompile Include="src\shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\texture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MDrawColorBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MDrawTextureBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pic.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pic_sb.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pic_2.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MActionSimple.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LuaConfig.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GLSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShaderProgram.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\shader.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\texture.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pic.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MGraphicsProtocol.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MDrawColorBox.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MDrawTextureBox.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MObjActionProtocol.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MActionSimple.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LuaConfig.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GLSprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GLShaderProgram.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

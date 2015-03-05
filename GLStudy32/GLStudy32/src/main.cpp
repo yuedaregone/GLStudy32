@@ -9,9 +9,13 @@
 #include <GL/glew.h>
 #include <GL/glfw3.h>
 #include <gl/gl.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include "shader.h"
+#include "MDrawColorBox.h"
+#include "MDrawTextureBox.h"
+#include "lua.hpp"
+#include <string>
+#include "LuaConfig.h"
+#include "GLSprite.h"
+
 //#pragma comment(lib,"glew.lib")
 /************************************************************************/
 /* glDraw																*/
@@ -19,202 +23,17 @@
 /* update draw:1.Enable draw point 2.Bind buff 3.Set point property		*/
 /*			   4.draw point 5.Disable draw point						*/
 /************************************************************************/
-class GlDraw
-{
-public:
-	GlDraw() 
-	{
-		m_vetexId = 0;
-		m_vetexId1 = 0;
-		m_programId = 0;
-	};
-	~GlDraw() {};
-	void shaderInit()
-	{
-		const char* verStr = "\
-			#version 120													\n\
-			attribute vec3 vertexPosition_modelspace;						\n\
-			attribute vec3 vertexColor;										\n\
-			varying vec3 fragmentColor;										\n\
-			uniform mat4 MVP;												\n\
-			void main(){													\n\
-				gl_Position = MVP*vec4(vertexPosition_modelspace, 1.0);		\n\
-				fragmentColor = vertexColor;								\n\
-			}																\n\
-		";
-
-		const char* fragStr = "\
-			#version 120									\n\
-			varying vec3 fragmentColor;						\n\
-			void main(){									\n\
-				gl_FragColor = vec4(fragmentColor,1);		\n\
-			}												\n\
-		";
-
-		/*const char* fragStr1 = "\
-			void main(){						\n\
-				gl_FragColor = vec4(1,0,0,0.4);	\n\
-			}									\n\
-		";*/
-		m_programId = loadShaders(verStr, fragStr);
-		m_vertexPos_modelspaceID = glGetAttribLocation(m_programId, "vertexPosition_modelspace");
-		m_matrixId = glGetUniformLocation(m_programId, "MVP");
-		m_colorId = glGetAttribLocation(m_programId, "vertexColor");
-		//create MVP
-		projection = glm::perspective(45.0f, 1.0f/1.0f, 0.1f, 100.0f);
-		View = glm::lookAt(
-			glm::vec3(0, 0, 6), // Camera is at (4,3,3), in World Space
-			glm::vec3(0, 0, 0), // and looks at the origin
-			glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-			);
-		Model = glm::mat4(1.0f);		
-		/*m_programId1 = loadShaders(verStr, fragStr1);
-		m_vertexPos_modelspaceID1 = glGetAttribLocation(m_programId1, "vertexPosition_modelspace");*/
-	}
-	void drawInit()
-	{
-		glGenBuffers(1, &m_vetexId);
-		glBindBuffer(GL_ARRAY_BUFFER,m_vetexId);
-		static const GLfloat g_vertex_buff_data[] = {
-			-1.0f, -1.0f, -1.0f, // triangle 1 : begin
-			-1.0f, -1.0f, 1.0f,
-			-1.0f, 1.0f, 1.0f, // triangle 1 : end
-			1.0f, 1.0f, -1.0f, // triangle 2 : begin
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, 1.0f, -1.0f, // triangle 2 : end
-			1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, 1.0f, 1.0f,
-			-1.0f, 1.0f, -1.0f,
-			1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, 1.0f,
-			-1.0f, -1.0f, -1.0f,
-			-1.0f, 1.0f, 1.0f,
-			-1.0f, -1.0f, 1.0f,
-			1.0f, -1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, -1.0f,
-			1.0f, -1.0f, -1.0f,
-			1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, -1.0f,
-			-1.0f, 1.0f, -1.0f,
-			1.0f, 1.0f, 1.0f,
-			-1.0f, 1.0f, -1.0f,
-			-1.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 1.0f,
-			-1.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, 1.0f
-		};
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buff_data), g_vertex_buff_data, GL_STATIC_DRAW);
-
-		
-		glGenBuffers(1, &m_vetexId1);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vetexId1);
-		GLfloat g_vertex_buff_data1[] = {
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-			0.8f, 0.0f, 0.0f,
-			0.0f, 0.8f, 0.0f,
-			0.0f, 0.0f, 0.8f,
-		};
-		glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buff_data1), g_vertex_buff_data1, GL_STATIC_DRAW);
-	}
-	void drawUpdate()
-	{		
-		glUseProgram(m_programId);
-				
-		Model = glm::rotate(Model, 0.01f, glm::vec3(1, 1, 1));
-		//Model = glm::translate(Model, glm::vec3(0.01f, 0, 0));		
-		m_MVP = projection*View*Model;
-		glUniformMatrix4fv(m_matrixId, 1, GL_FALSE, &m_MVP[0][0]);
-		// 1rst attribute buffer : vertices
-		glEnableVertexAttribArray(m_vertexPos_modelspaceID);
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_vetexId);
-		glVertexAttribPointer(
-			m_vertexPos_modelspaceID,// attribute 0. No particular reason for 0, but must match the layout in the shader.
-			3,					// size
-			GL_FLOAT,			// type
-			GL_FALSE,			// normalized?
-			0,					// stride
-			(void*)0);			// array buffer offset
-		//set color property
-		glEnableVertexAttribArray(m_colorId);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vetexId1);
-		glVertexAttribPointer(m_colorId, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, 36); // Starting from vertex 1; 3 vertices total -&gt; 1 triangle
-		glDisableVertexAttribArray(m_colorId);
-		glDisableVertexAttribArray(m_vertexPos_modelspaceID);
-
-		/*glUseProgram(m_programId1);
-		glEnableVertexAttribArray(m_vertexPos_modelspaceID1);
-		glBindBuffer(GL_ARRAY_BUFFER, m_vetexId1);
-		glVertexAttribPointer(m_vertexPos_modelspaceID1, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glDisableVertexAttribArray(m_vertexPos_modelspaceID1);	*/	
-	}
-private:
-	GLuint m_vetexId;
-	GLuint m_vetexId1;
-	GLuint m_programId;
-	GLuint m_vertexPos_modelspaceID;
-	GLuint m_matrixId;
-	GLuint m_colorId;
-	glm::mat4 projection;
-	glm::mat4 View;
-	glm::mat4 Model;
-	glm::mat4 m_MVP;
-	/*GLuint m_programId1;
-	GLuint m_vertexPos_modelspaceID1;*/
-};
-
+//int _stdcall WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 int main(void)
 {
+	//init lua
+	g_pLuaConfig->initLua();	
+
+	int width = 300, height = 300;
+	std::string title = "TEST";
+	if (g_pLuaConfig->isExit())
+		g_pLuaConfig->getInfo(width, height, title);
+
 	if (!glfwInit()){ //init glfw	
 		fprintf(stderr, "Failed to init glfw!");
 		return -1;
@@ -224,7 +43,7 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	
 	//create a openGL window
-	GLFWwindow* window = glfwCreateWindow(300, 300, "TEST", NULL, NULL); 
+	GLFWwindow* window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 	if (!window) {		
 		fprintf(stderr, "Failed to create glfw window!");
 		glfwTerminate();
@@ -236,19 +55,32 @@ int main(void)
 		fprintf(stderr, "Failed to init glew!");	
 		return -1;
 	}
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //set gl background color
+	float r = 0.0f, g = 0.0f, b = 0.0f, a = 1.0f;
+	if (g_pLuaConfig->isExit())
+		g_pLuaConfig->getRGBA(r, g, b, a);
+	glClearColor(r, g, b, a); //set gl background color
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
+	glEnable(GL_CULL_FACE);
 	
-	GlDraw glDraw; //gl draw class
-	glDraw.shaderInit();
-	glDraw.drawInit();
+	//MGraphicsProtocol* glDraw = new MDrawTextureBox(); //gl draw class
+	//glDraw->shaderInit();
+	//glDraw->drawInit();
 	
+	GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
+	sp->setPosition(150, 150);
+
+	GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
+	sp1->setPosition(25, 25);
+
 	bool isRun  = true;
 	while (isRun) { //gl draw main loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	//clear color	
 		
-		glDraw.drawUpdate(); //gl draw update
+		//glDraw->actionUpdate();
+		//glDraw->drawUpdate(); //gl draw update
+		sp->draw();
+		sp1->draw();
 		
 		glfwSwapBuffers(window);
 		isRun = GLFW_PRESS != glfwGetKey(window, GLFW_KEY_ESCAPE)
@@ -256,6 +88,8 @@ int main(void)
 		glfwPollEvents();
 		Sleep(1);
 	}
+	//delete glDraw;
+	g_pLuaConfig->closeLua();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;
