@@ -14,7 +14,8 @@ private:
 	GLuint m_vertexPosition;
 	GLuint m_MVP;
 	GLuint m_UV;
-	GLuint m_sampler;	
+	GLuint m_sampler;
+	GLuint m_colorEx;
 	static GLShaderProgram* m_instance;
 	friend GLSprite;
 };

@@ -25,6 +25,7 @@ void GLSprite::initWithBMP(const char* file, int w, int h)
 {
 	m_w = w;
 	m_h = h;
+	m_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	g_pShaderProgram;
 	m_texture = loadBMP_custom(file);	
 	initVertex();
@@ -69,12 +70,19 @@ void GLSprite::setPosition(int x, int y)
 	m_isDirty = true;
 }
 
+void GLSprite::setColor(float r, float g, float b)
+{
+	m_color = glm::vec4(r, g, b, 1.0f);
+}
+
 void GLSprite::draw()
 {
 	g_pShaderProgram->use();
 
 	updateMatrix();
 	glUniformMatrix4fv(g_pShaderProgram->m_MVP, 1, GL_FALSE, &m_mvp[0][0]);
+	//set color
+	glUniform4f(g_pShaderProgram->m_colorEx, m_color.r, m_color.g, m_color.b, m_color.a);	
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
@@ -96,6 +104,13 @@ void GLSprite::draw()
 void GLSprite::initMatrix()
 {	
 	//in fact, only model matrix
+	glm::mat4 projection = glm::perspective(90.0f, 1.0f / 1.0f, 0.1f, 100.0f);
+	glm::mat4 View = glm::lookAt(
+		glm::vec3(0, 0, 1.61f), // Camera is at (4,3,3), in World Space
+		glm::vec3(0, 0, 0), // and looks at the origin
+		glm::vec3(0, 1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
+		);
+	m_vp = projection*View;
 	m_mvp = glm::mat4(1.0f);
 }
 
@@ -123,7 +138,7 @@ void GLSprite::updateMatrix()
 		float posY = (float)m_y*2  / height - 1;
 		glm::mat4 translateMatrix = glm::translate(temp, glm::vec3(posX, posY, 0.0f));
 
-		m_mvp = translateMatrix*scaleMatrix;
+		m_mvp = m_vp*translateMatrix*scaleMatrix;
 		m_isDirty = false;
 	}
 }

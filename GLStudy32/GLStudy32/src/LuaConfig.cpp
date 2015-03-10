@@ -105,8 +105,16 @@ void LuaConfig::getWindowSize(int& w, int& h)
 {
 	if (m_width < 0 || m_height < 0)
 	{
-		std::string temp;
-		getInfo(w, h, temp);
+		if (isExit())
+		{
+			std::string temp;
+			getInfo(w, h, temp);
+		}
+		else
+		{
+			w = m_width = 300;
+			h = m_height = 300;
+		}
 	}
 	else
 	{

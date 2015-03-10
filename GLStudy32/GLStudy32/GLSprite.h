@@ -9,6 +9,7 @@ public:
 	static GLSprite* createWithBMP(const char* file, int w, int h);
 	void initWithBMP(const char* file, int w, int h);
 	void setPosition(int x, int y);
+	void setColor(float r, float g, float b);
 	void draw();
 private:
 	GLSprite() :m_w(0), m_h(0), m_x(0), m_y(0), m_isDirty(true){}
@@ -26,7 +27,10 @@ private:
 	GLuint m_texture;
 	GLuint m_vertexId;
 	GLuint m_textureCoodId;
+	GLuint m_vao;
 	glm::mat4 m_mvp;
+	glm::mat4 m_vp;
+	glm::vec4 m_color;
 	bool m_isDirty;
 };
 

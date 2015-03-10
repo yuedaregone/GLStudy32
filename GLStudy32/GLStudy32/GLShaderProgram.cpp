@@ -43,9 +43,11 @@ void GLShaderProgram::shaderInit()
 		const char* fragStr = "\
 			#version 120											\n\
 			varying vec2 UV;										\n\
+			uniform vec4 frag_color;								\n\
 			uniform sampler2D myTextureSampler;						\n\
 			void main(){											\n\
-				gl_FragColor = texture2D(myTextureSampler,UV);		\n\
+				vec4 texColor =	texture2D(myTextureSampler,UV);		\n\
+				gl_FragColor = texColor*frag_color;					\n\
 			}														\n\
 		";	
 		m_programId = loadShaders(verStr, fragStr);
@@ -54,10 +56,11 @@ void GLShaderProgram::shaderInit()
 
 void GLShaderProgram::dataInit()
 {
-	m_vertexPosition = glGetAttribLocation(m_programId, "vertexPosition_modelspace");
-	m_UV = glGetAttribLocation(m_programId, "vertexUV");
+	m_vertexPosition = glGetAttribLocation(m_programId, "vertexPosition_modelspace");	
 	m_MVP = glGetUniformLocation(m_programId, "MVP");
+	m_UV = glGetAttribLocation(m_programId, "vertexUV");
 	m_sampler = glGetUniformLocation(m_programId, "myTextureSampler");
+	m_colorEx = glGetUniformLocation(m_programId, "frag_color");
 }
 
 void GLShaderProgram::use()
