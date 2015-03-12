@@ -16,6 +16,22 @@
 #include "LuaConfig.h"
 #include "GLSprite.h"
 
+void calculate_fps()
+{
+	static double pre_time = 0;
+	static int frames = 0;
+
+	++frames;
+	double cur_time = glfwGetTime();
+	double gap_time = cur_time - pre_time;
+	if (gap_time > 1.0)
+	{
+		double fps = frames / gap_time;
+		printf("%.1f\n", fps);
+		frames = 0;
+		pre_time = cur_time;
+	}
+}
 //#pragma comment(lib,"glew.lib")
 /************************************************************************/
 /* glDraw																*/
@@ -69,10 +85,11 @@ int main(void)
 	
 	GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
 	sp->setPosition(150, 150);
+	sp->setOpacity(0.3);
 
 	GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
 	sp1->setPosition(25, 25);
-
+	sp1->setColor(1.0, 0.0, 1.0, 1.0);
 	bool isRun  = true;
 	while (isRun) { //gl draw main loop
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	//clear color	
@@ -86,6 +103,7 @@ int main(void)
 		isRun = GLFW_PRESS != glfwGetKey(window, GLFW_KEY_ESCAPE)
 				&& !glfwWindowShouldClose(window);
 		glfwPollEvents();
+		calculate_fps();
 		Sleep(1);
 	}
 	//delete glDraw;

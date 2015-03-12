@@ -22,6 +22,8 @@ $RECYCLE.BIN/
 *.ilk
 *.pdb
 *.obj
+*.suo
+*.idb
 
 # Windows shortcuts
 *.lnk

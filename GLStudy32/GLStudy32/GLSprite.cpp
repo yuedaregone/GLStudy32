@@ -70,9 +70,15 @@ void GLSprite::setPosition(int x, int y)
 	m_isDirty = true;
 }
 
-void GLSprite::setColor(float r, float g, float b)
+void GLSprite::setColor(float r, float g, float b, float a)
 {
-	m_color = glm::vec4(r, g, b, 1.0f);
+	m_color = glm::vec4(r*a, g*a, b*a, a);
+}
+
+void GLSprite::setOpacity(float opacity)
+{
+	float a = m_color.a;
+	m_color = glm::vec4(m_color.r / a*opacity, m_color.g / a*opacity, m_color.b / a*opacity, opacity);
 }
 
 void GLSprite::draw()
@@ -104,7 +110,9 @@ void GLSprite::draw()
 void GLSprite::initMatrix()
 {	
 	//in fact, only model matrix
-	glm::mat4 projection = glm::perspective(90.0f, 1.0f / 1.0f, 0.1f, 100.0f);
+	int width = 0, height = 0;
+	g_pLuaConfig->getWindowSize(width, height);
+	glm::mat4 projection = glm::perspective(90.0f, (GLfloat)width / height, 0.1f, 100.0f);
 	glm::mat4 View = glm::lookAt(
 		glm::vec3(0, 0, 1.61f), // Camera is at (4,3,3), in World Space
 		glm::vec3(0, 0, 0), // and looks at the origin

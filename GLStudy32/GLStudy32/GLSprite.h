@@ -9,7 +9,8 @@ public:
 	static GLSprite* createWithBMP(const char* file, int w, int h);
 	void initWithBMP(const char* file, int w, int h);
 	void setPosition(int x, int y);
-	void setColor(float r, float g, float b);
+	void setColor(float r, float g, float b, float a = 1.0f);
+	void setOpacity(float opacity);
 	void draw();
 private:
 	GLSprite() :m_w(0), m_h(0), m_x(0), m_y(0), m_isDirty(true){}
