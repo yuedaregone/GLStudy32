@@ -15,12 +15,12 @@
     <Filter Include="src\shader\fliter">
       <UniqueIdentifier>{bee48974-3a24-45b4-a569-dc455b316e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\data">
+      <UniqueIdentifier>{38deb10d-acff-4255-a642-8b4040a93e46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\shader.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\texture.cpp">
@@ -30,15 +30,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\MDrawTextureBox.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pic.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pic_sb.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pic_2.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\MActionSimple.cpp">
@@ -56,15 +47,21 @@
     <ClCompile Include="src\GLSprite.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\shader\shader.cpp">
+      <Filter>src\shader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\pic.cpp">
+      <Filter>src\data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\pic_2.cpp">
+      <Filter>src\data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\data\pic_sb.cpp">
+      <Filter>src\data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\shader.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\texture.hpp">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\pic.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\MGraphicsProtocol.h">
@@ -93,6 +90,33 @@
     </ClInclude>
     <ClInclude Include="src\GLSprite.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_color_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_color_vertex.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_blur_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_gray_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_spark_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_vertex.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data\pic.h">
+      <Filter>src\data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

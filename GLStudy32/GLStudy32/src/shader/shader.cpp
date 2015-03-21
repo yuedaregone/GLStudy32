@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <string.h>
+
 GLuint loadShaders(const char* vertexStr, const char* fragmentStr)
 {
 	//Create the shaders
@@ -57,3 +58,19 @@ GLuint loadShaders(const char* vertexStr, const char* fragmentStr)
 	
 	return programId;
 }
+
+const GLchar* char_shader_color_vertex =
+#include "shader_color_vertex.h"
+const GLchar* char_shader_color_frag =
+#include "shader_color_vertex.h"
+
+const GLchar* char_shader_texture_vertex =
+#include "shader_color_vertex.h"
+const GLchar* char_shader_texture_frag =
+#include "shader_color_vertex.h"
+const GLchar* char_shader_texture_blur_frag =
+#include "shader_color_vertex.h"
+const GLchar* char_shader_texture_gray_frag =
+#include "shader_color_vertex.h"
+const GLchar* char_shader_texture_spark_frag =
+#include "shader_color_vertex.h"
