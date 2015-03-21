@@ -9,6 +9,12 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="src\shader">
+      <UniqueIdentifier>{08a273cd-5613-4b62-be0a-8ca6026c2c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\shader\fliter">
+      <UniqueIdentifier>{bee48974-3a24-45b4-a569-dc455b316e0d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -41,10 +47,13 @@
     <ClCompile Include="src\LuaConfig.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="GLSprite.cpp">
+    <ClCompile Include="src\GLShaderProgram.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="GLShaderProgram.cpp">
+    <ClCompile Include="src\GLShaderProgramMgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GLSprite.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,10 +85,13 @@
     <ClInclude Include="src\LuaConfig.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="GLSprite.h">
+    <ClInclude Include="src\GLShaderProgram.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="GLShaderProgram.h">
+    <ClInclude Include="src\GLShaderProgramMgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLSprite.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

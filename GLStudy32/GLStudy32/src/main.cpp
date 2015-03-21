@@ -66,6 +66,7 @@ int main(void)
 		return -1;
 	}
 	glfwMakeContextCurrent(window); //set the openGL context
+	glfwSetWindowPos(window, 0, 600);
 
 	if (glewInit() != GLEW_OK) { //init glew
 		fprintf(stderr, "Failed to init glew!");	
@@ -85,13 +86,23 @@ int main(void)
 	
 	GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
 	sp->setPosition(150, 150);
-	sp->setOpacity(0.3);
+	//sp->setOpacity(0.3f);
+	//sp->setScale(0.5f, 1.0f);
+	//sp->setRotation(90);
 
 	GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
 	sp1->setPosition(25, 25);
-	sp1->setColor(1.0, 0.0, 1.0, 1.0);
+	sp1->setScale(1.5f, 2.0f);
+	sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
+
+	double interval = 1.0f / 60;
+	double lastTime = glfwGetTime();
 	bool isRun  = true;
 	while (isRun) { //gl draw main loop
+		double nowTime = glfwGetTime();
+		if (nowTime - lastTime < interval)
+			continue;
+		lastTime = nowTime;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	//clear color	
 		
 		//glDraw->actionUpdate();

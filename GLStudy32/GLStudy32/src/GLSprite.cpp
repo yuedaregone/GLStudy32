@@ -81,6 +81,24 @@ void GLSprite::setOpacity(float opacity)
 	m_color = glm::vec4(m_color.r / a*opacity, m_color.g / a*opacity, m_color.b / a*opacity, opacity);
 }
 
+void GLSprite::setScale(float s)
+{
+	m_scaleX = m_scaleY = s;
+	m_isDirty = true;
+}
+
+void GLSprite::setScale(float sx, float sy)
+{
+	m_scaleX = sx;
+	m_scaleY = sy;
+	m_isDirty = true;
+}
+
+void GLSprite::setRotation(float degree)
+{
+	m_rotation = degree / 180 * glm::pi<float>();
+}
+
 void GLSprite::draw()
 {
 	g_pShaderProgram->use();
@@ -138,15 +156,17 @@ void GLSprite::updateMatrix()
 		//scale
 		int width = 0, height = 0;
 		g_pLuaConfig->getWindowSize(width, height);
-		float scaleX = (float)m_w / width;
-		float scaleY = (float)m_h / height;
+		float scaleX = (float)m_w / width * m_scaleX;
+		float scaleY = (float)m_h / height * m_scaleY;
 		glm::mat4 scaleMatrix = glm::scale(temp, glm::vec3(scaleX, scaleY, 1.0f));
 		//position
 		float posX = (float)m_x*2  / width - 1;
 		float posY = (float)m_y*2  / height - 1;
 		glm::mat4 translateMatrix = glm::translate(temp, glm::vec3(posX, posY, 0.0f));
+		//rotation
+		glm::mat4 rotationMatrix = glm::rotate(temp, m_rotation, glm::vec3(0.0f, 0.0f, 1.0f));
 
-		m_mvp = m_vp*translateMatrix*scaleMatrix;
+		m_mvp = m_vp*translateMatrix*rotationMatrix*scaleMatrix;
 		m_isDirty = false;
 	}
 }

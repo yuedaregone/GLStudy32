@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\src;.\GL;.\glm\include;..\liblua\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\src\shader\fliter;.\src\shader;.\src;.\GL;.\glm\include;..\liblua\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -78,8 +78,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GLShaderProgram.cpp" />
-    <ClCompile Include="GLSprite.cpp" />
+    <ClCompile Include="src\GLShaderProgram.cpp" />
+    <ClCompile Include="src\GLShaderProgramMgr.cpp" />
+    <ClCompile Include="src\GLSprite.cpp" />
     <ClCompile Include="src\LuaConfig.cpp" />
     <ClCompile Include="src\MActionSimple.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -92,8 +93,9 @@
     <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GLShaderProgram.h" />
-    <ClInclude Include="GLSprite.h" />
+    <ClInclude Include="src\GLShaderProgram.h" />
+    <ClInclude Include="src\GLShaderProgramMgr.h" />
+    <ClInclude Include="src\GLSprite.h" />
     <ClInclude Include="src\LuaConfig.h" />
     <ClInclude Include="src\MActionSimple.h" />
     <ClInclude Include="src\MDrawColorBox.h" />
