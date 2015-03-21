@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string.h>
 
-GLuint loadShaders(const char* vertexStr, const char* fragmentStr)
+GLuint loadShaders(const GLchar* vertexStr, const GLchar* fragmentStr)
 {
 	//Create the shaders
 	GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);

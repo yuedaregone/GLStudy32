@@ -22,15 +22,14 @@ void setTextureParameteri()
 	}
 }
 
-GLuint loadBMP_custom(const char * imagepath){
+GLuint loadBMP_custom(const char * imagepath, unsigned int &width, unsigned int &height){
 
 	printf("Reading image %s\n", imagepath);
 
 	// Data read from the header of the BMP file
 	unsigned char header[54];
 	unsigned int dataPos;
-	unsigned int imageSize;
-	unsigned int width, height;
+	unsigned int imageSize;	
 	// Actual RGB data
 	unsigned char * data;
 

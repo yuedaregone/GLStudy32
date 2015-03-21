@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\src\shader\fliter;.\src\shader;.\src\data;.\src;.\GL;.\glm\include;..\liblua\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\src\fliter;.\src\shader;.\src\data;.\src;.\GL;.\glm\include;..\liblua\lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -81,6 +81,8 @@
     <ClCompile Include="src\data\pic.cpp" />
     <ClCompile Include="src\data\pic_2.cpp" />
     <ClCompile Include="src\data\pic_sb.cpp" />
+    <ClCompile Include="src\fliter\GLFilter.cpp" />
+    <ClCompile Include="src\fliter\GLFilterMgr.cpp" />
     <ClCompile Include="src\GLShaderProgram.cpp" />
     <ClCompile Include="src\GLShaderProgramMgr.cpp" />
     <ClCompile Include="src\GLSprite.cpp" />
@@ -90,10 +92,13 @@
     <ClCompile Include="src\MDrawColorBox.cpp" />
     <ClCompile Include="src\MDrawTextureBox.cpp" />
     <ClCompile Include="src\shader\shader.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\data\pic.h" />
+    <ClInclude Include="src\fliter\GLFilter.h" />
+    <ClInclude Include="src\fliter\GLFilterMgr.h" />
     <ClInclude Include="src\GLShaderProgram.h" />
     <ClInclude Include="src\GLShaderProgramMgr.h" />
     <ClInclude Include="src\GLSprite.h" />
@@ -111,6 +116,7 @@
     <ClInclude Include="src\shader\shader_texture_gray_frag.h" />
     <ClInclude Include="src\shader\shader_texture_spark_frag.h" />
     <ClInclude Include="src\shader\shader_texture_vertex.h" />
+    <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\texture.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

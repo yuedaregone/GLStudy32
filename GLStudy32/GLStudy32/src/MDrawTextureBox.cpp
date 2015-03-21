@@ -57,7 +57,8 @@ void MDrawTextureBox::shaderInit()
 		m_matrixId = glGetUniformLocation(m_programId, "MVP");
 		m_colorId = glGetAttribLocation(m_programId, "vertexUV");
 		//add texture
-		m_texture = loadBMP_custom("texture.bmp");
+		unsigned int w, h;
+		m_texture = loadBMP_custom("texture.bmp", w, h);
 		//m_texture = loadDDS("texture.dds");
 		//m_texture = loadData(ImageData::imgPic_1, sizeof(ImageData::imgPic_1), 128, 128);
 		m_textureID = glGetUniformLocation(m_programId, "myTextureSampler");

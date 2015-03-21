@@ -27,7 +27,7 @@ void GLSprite::initWithBMP(const char* file, int w, int h)
 	m_h = h;
 	m_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	g_pShaderProgram;
-	m_texture = loadBMP_custom(file);	
+	m_texture = loadBMP_custom(file, m_w, m_h);	
 	initVertex();
 	initTextureCood();
 	initMatrix();

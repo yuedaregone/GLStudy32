@@ -24,8 +24,8 @@ private:
 	void initMatrix();
 	void updateMatrix();
 private:
-	int m_w;
-	int m_h;
+	unsigned int m_w;
+	unsigned int m_h;
 	int m_x;
 	int m_y;
 	float m_scaleX;

@@ -12,11 +12,11 @@
     <Filter Include="src\shader">
       <UniqueIdentifier>{08a273cd-5613-4b62-be0a-8ca6026c2c38}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\shader\fliter">
-      <UniqueIdentifier>{bee48974-3a24-45b4-a569-dc455b316e0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\data">
       <UniqueIdentifier>{38deb10d-acff-4255-a642-8b4040a93e46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\fliter">
+      <UniqueIdentifier>{bee48974-3a24-45b4-a569-dc455b316e0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,15 @@
     </ClCompile>
     <ClCompile Include="src\data\pic_sb.cpp">
       <Filter>src\data</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fliter\GLFilterMgr.cpp">
+      <Filter>src\fliter</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fliter\GLFilter.cpp">
+      <Filter>src\fliter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +126,15 @@
     </ClInclude>
     <ClInclude Include="src\data\pic.h">
       <Filter>src\data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fliter\GLFilter.h">
+      <Filter>src\fliter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fliter\GLFilterMgr.h">
+      <Filter>src\fliter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
