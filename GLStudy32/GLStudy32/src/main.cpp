@@ -15,6 +15,9 @@
 #include <string>
 #include "LuaConfig.h"
 #include "GLSprite.h"
+#include "Sprite.h"
+#include "GLFilter.h"
+#include "pic.h"
 
 void calculate_fps()
 {
@@ -84,16 +87,31 @@ int main(void)
 	//glDraw->shaderInit();
 	//glDraw->drawInit();
 	
-	GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
-	sp->setPosition(150, 150);
+	//GLSprite* sp = GLSprite::createWithBMP("texture.bmp", 100, 100);
+	//sp->setPosition(150, 150);
 	//sp->setOpacity(0.3f);
 	//sp->setScale(0.5f, 1.0f);
 	//sp->setRotation(90);
 
-	GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
-	sp1->setPosition(25, 25);
-	sp1->setScale(1.5f, 2.0f);
-	sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
+	//GLSprite* sp1 = GLSprite::createWithBMP("texture.bmp", 50, 50);
+	//sp1->setPosition(25, 25);
+	//sp1->setScale(1.5f, 2.0f);
+	//sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
+
+	Sprite* sp = Sprite::createWithBMP("texture.bmp");//createWithDDS("texture.dds");
+	sp->setPosition(150, 150);
+
+	GLFilterSpark* filter = new GLFilterSpark();
+	filter->initFilter();	
+	sp->setFilter(filter);
+
+
+	Sprite* sp1 = Sprite::createWithData(ImageData::imgPic_1, 128*128*3, 128, 128);
+	sp1->setScale(0.5f);
+	sp1->setPosition(32, 32);
+	//sp1->setFilter(filter);
+	
+	float temp = -1.2f;
 
 	double interval = 1.0f / 60;
 	double lastTime = glfwGetTime();
@@ -107,8 +125,19 @@ int main(void)
 		
 		//glDraw->actionUpdate();
 		//glDraw->drawUpdate(); //gl draw update
+		//sp->draw();
+		//sp1->draw();
+		filter->setSparkOffset(temp);		
 		sp->draw();
 		sp1->draw();
+		if (temp > 1.2f)
+		{
+			temp = -1.2f;
+		}
+		else
+		{
+			temp = temp + 0.02f;
+		}
 		
 		glfwSwapBuffers(window);
 		isRun = GLFW_PRESS != glfwGetKey(window, GLFW_KEY_ESCAPE)
@@ -118,6 +147,7 @@ int main(void)
 		Sleep(1);
 	}
 	//delete glDraw;
+	sp->release();
 	g_pLuaConfig->closeLua();
 	glfwDestroyWindow(window);
 	glfwTerminate();

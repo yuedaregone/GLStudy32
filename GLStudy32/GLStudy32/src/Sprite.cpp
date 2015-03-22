@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "LuaConfig.h"
 #include "GLFilterMgr.h"
+#include "GLFilter.h"
 
 Sprite* Sprite::createWithBMP(const char* fileName)
 {
@@ -19,42 +20,138 @@ Sprite* Sprite::createWithBMP(const char* fileName)
 	return pRet;
 }
 
-void Sprite::initWithBMP(const char* fileName)
+Sprite* Sprite::createWithData(void* _data, size_t _size, size_t _width, size_t _height)
 {
-	m_texture = loadBMP_custom(fileName, m_w, m_h);
+	Sprite* pRet = new Sprite();
+	if (pRet)
+	{
+		pRet->initWithData(_data, _size, _width, _height);
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+	}
+	return pRet;
+}
+
+Sprite* Sprite::createWithDDS(const char* fileName)
+{
+	Sprite* pRet = new Sprite();
+	if (pRet)
+	{
+		pRet->initWithDDS(fileName);
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+	}
+	return pRet;
+}
+
+Sprite::~Sprite()
+{
+	if (!m_isDefaultFilter)
+	{
+		m_filter->release();
+	}
+}
+
+void Sprite::release()
+{
+	delete this;
+}
+
+void Sprite::initWithBMP(const char* fileName)
+{	
+	init();
+	m_texture = loadBMP_custom(fileName, m_w, m_h);	
+}
+
+void Sprite::initWithData(void* _data, size_t _size, size_t _width, size_t _height)
+{
+	init();
+	m_texture = loadData(_data, _size, _width, _height);
+	m_w = _width;
+	m_h = _height;
+}
+
+void Sprite::initWithDDS(const char* fileName)
+{
+	init();
+	m_texture = loadDDS(fileName, m_w, m_h);
+}
+
+void Sprite::init()
+{
+	m_color = glm::vec4(1.0f);
 	initVertex();
 	initTextureCood();
 	initMatrix();
+	m_filter = g_pFilterMgr->getDefaultFilter();
+	m_isDefaultFilter = true;	
 }
 
 void Sprite::setPosition(int x, int y)
 {
-
+	m_x = x;
+	m_y = y;
+	m_isDirty = true;
 }
 
 void Sprite::setColor(float r, float g, float b, float a)
 {
-
+	m_color = glm::vec4(r*a, g*a, b*a, a);
 }
 
 void Sprite::setOpacity(float opacity)
 {
-
+	float a = m_color.a;
+	m_color = glm::vec4(m_color.r / a*opacity, m_color.g / a*opacity, m_color.b / a*opacity, opacity);
 }
 
 void Sprite::setScale(float s)
 {
-
+	m_scaleX = m_scaleY = s;
+	m_isDirty = true;
 }
 
 void Sprite::setScale(float sx, float sy)
 {
-
+	m_scaleX = sx;
+	m_scaleY = sy;
+	m_isDirty = true;
 }
 
 void Sprite::setRotation(float degree)
 {
+	m_rotation = degree / 180 * glm::pi<float>();
+}
 
+void Sprite::getSize(unsigned int& w, unsigned int& h)
+{
+	w = m_w;
+	h = m_h;
+}
+
+void Sprite::setFilter(GLFilter* _filter)
+{
+	if (m_isDefaultFilter)
+	{
+		if (m_filter != _filter)
+		{
+			m_filter = _filter;
+			m_filter->retain();
+		}
+	}
+	else
+	{
+		m_filter->release();
+		m_filter = _filter;
+		m_filter->retain();
+	}
+	m_isDefaultFilter = false;
 }
 
 void Sprite::initVertex()
@@ -127,5 +224,9 @@ void Sprite::updateMatrix()
 void Sprite::draw()
 {
 	updateMatrix();
-	g_pFilterMgr->getDefaultFilter()->render(this);
+	m_filter->use();
+	//glEnable(GL_SCISSOR_TEST);
+	//glScissor(0, 0, 150, 150);
+	m_filter->render(this);
+	//glDisable(GL_SCISSOR_TEST);
 }

@@ -126,7 +126,7 @@ GLuint loadBMP_custom(const char * imagepath, unsigned int &width, unsigned int 
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-GLuint loadDDS(const char * imagepath){
+GLuint loadDDS(const char * imagepath, unsigned int& _w, unsigned int& _h){
 
 	unsigned char header[124];
 
@@ -156,6 +156,8 @@ GLuint loadDDS(const char * imagepath){
 	unsigned int mipMapCount = *(unsigned int*)&(header[24]);
 	unsigned int fourCC      = *(unsigned int*)&(header[80]);
 
+	_w = width;
+	_h = height;
  
 	unsigned char * buffer;
 	unsigned int bufsize;

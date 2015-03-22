@@ -62,15 +62,15 @@ GLuint loadShaders(const GLchar* vertexStr, const GLchar* fragmentStr)
 const GLchar* char_shader_color_vertex =
 #include "shader_color_vertex.h"
 const GLchar* char_shader_color_frag =
-#include "shader_color_vertex.h"
+#include "shader_color_frag.h"
 
 const GLchar* char_shader_texture_vertex =
-#include "shader_color_vertex.h"
+#include "shader_texture_vertex.h"
 const GLchar* char_shader_texture_frag =
-#include "shader_color_vertex.h"
+#include "shader_texture_frag.h"
 const GLchar* char_shader_texture_blur_frag =
-#include "shader_color_vertex.h"
+#include "shader_texture_blur_frag.h"
 const GLchar* char_shader_texture_gray_frag =
-#include "shader_color_vertex.h"
+#include "shader_texture_gray_frag.h"
 const GLchar* char_shader_texture_spark_frag =
-#include "shader_color_vertex.h"
+#include "shader_texture_spark_frag.h"

@@ -1,23 +1,61 @@
 #ifndef __GLFILTER_H__
 #define __GLFILTER_H__
 #include <GL/glew.h>
-#include "Sprite.h"
-
+#include "glm/glm.hpp"
+class Sprite;
 class GLFilter
 {
 public:
-	void initFilter();	
-	void render(Sprite* _sp);
+	virtual void initFilter();	
+	void use();
+	virtual void render(Sprite* _sp);
+	void retain();
+	void release();
 public:
 	GLFilter();
 	virtual ~GLFilter() {}
 protected:
-	GLuint m_iProgram;
-	GLuint m_vertexPosition;
-	GLuint m_MVP;
-	GLuint m_UV;
-	GLuint m_sampler;
-	GLuint m_colorEx;
+	void initShaderVarible();
+protected:
+	GLint m_iProgram;
+	GLint m_vertexPosition;
+	GLint m_MVP;
+	GLint m_UV;
+	GLint m_sampler;
+	GLint m_colorEx;	
+private:
+	unsigned int m_reference;
+};
+
+class GLFilterGray :public GLFilter
+{
+public:
+	virtual void initFilter();	
+public:
+	GLFilterGray() :GLFilter() {};
+	~GLFilterGray() {}
+};
+
+class GLFilterSpark :public GLFilter
+{
+public:
+	virtual void initFilter();
+	virtual void render(Sprite* _sp);
+	void setSparkWidth(float _w) { m_width = _w; }
+	void setSparkOffset(float _offset) { m_offset = _offset; }
+	float getSparkWidth() { return m_width; }
+	float getSparkOffset() { return m_offset; }
+	void setSparkColor(float r, float g, float b);
+public:
+	GLFilterSpark() :GLFilter(), m_width(0.2f), m_offset(0.0f), m_sparkColor(glm::vec4(1.0)){};
+	~GLFilterSpark() {}
+private:
+	GLint m_shaderWidth;
+	GLint m_shaderOffset;
+	GLint m_shaderColor;
+	float m_width; //spark width
+	float m_offset; //spark offset
+	glm::vec4 m_sparkColor;
 };
 
 #endif

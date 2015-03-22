@@ -10,7 +10,7 @@ GLuint loadBMP_custom(const char * imagepath, unsigned int &width, unsigned int 
 //GLuint loadTGA_glfw(const char * imagepath);
 
 // Load a .DDS file using GLFW's own loader
-GLuint loadDDS(const char * imagepath);
+GLuint loadDDS(const char * imagepath, unsigned int& _w, unsigned int& _h);
 
 // Load Data
 GLuint loadData(void* _data, size_t _size, size_t _width, size_t _height);
