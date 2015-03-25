@@ -68,6 +68,9 @@
     <ClCompile Include="src\fliter\GLFilter.cpp">
       <Filter>src\fliter</Filter>
     </ClCompile>
+    <ClCompile Include="src\data\MImage.cpp">
+      <Filter>src\data</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\texture.hpp">
@@ -135,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="src\fliter\GLFilterMgr.h">
       <Filter>src\fliter</Filter>
+    </ClInclude>
+    <ClInclude Include="src\data\MImage.h">
+      <Filter>src\data</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

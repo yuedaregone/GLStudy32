@@ -8,10 +8,12 @@ class Sprite
 {
 public:
     static Sprite* createWithBMP(const char* fileName);
-	static Sprite* createWithData(void* _data, size_t _size, size_t _width, size_t _height);
+	static Sprite* createWithPNG(const char* fileName);
+	static Sprite* createWithData(void* _data, bool hasAlp, size_t _width, size_t _height);
 	static Sprite* createWithDDS(const char* fileName);
-    void initWithBMP(const char* fileName);
-	void initWithData(void* _data, size_t _size, size_t _width, size_t _height);
+	void initWithBMP(const char* fileName);
+    void initWithPNG(const char* fileName);
+	void initWithData(void* _data, bool hasAlp, size_t _width, size_t _height);
 	void initWithDDS(const char* fileName);
 	void init();
     void setPosition(int x, int y);
@@ -25,7 +27,7 @@ public:
     void draw();
 	void release();
 private:
-    Sprite() :m_w(0), m_h(0), m_x(0), m_y(0), m_isDirty(true), m_scaleX(1.0f), m_scaleY(1.0f), m_rotation(0.0f){}
+	Sprite() :m_w(0), m_h(0), m_x(0), m_y(0), m_isDirty(true), m_scaleX(1.0f), m_scaleY(1.0f), m_rotation(0.0f){}
 	~Sprite();
 private:
 	void initVertex();
@@ -40,7 +42,7 @@ private:
     float m_scaleX;
     float m_scaleY;
     float m_rotation;
-    bool m_isDirty;
+    bool m_isDirty;	
 private:
 	GLuint m_texture;
 	GLuint m_vertexId;

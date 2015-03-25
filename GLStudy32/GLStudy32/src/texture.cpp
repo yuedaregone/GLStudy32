@@ -66,9 +66,17 @@ GLuint loadBMP_custom(const char * imagepath, unsigned int &width, unsigned int 
 	// Create a buffer
 	data = new unsigned char [imageSize];
 
+	unsigned int rowLen = width * 3;
 	// Read the actual data from the file into the buffer
-	fread(data,1,imageSize,file);
+	unsigned char* buff = new unsigned char[imageSize];
+	fread(buff, 1, imageSize, file);
 
+	for (unsigned int i = 0; i < height; ++i)
+	{
+		memcpy(data + i*rowLen, buff + (height - 1 - i)*rowLen, rowLen);
+	}
+
+	delete[] buff;
 	// Everything is in memory now, the file wan be closed
 	fclose (file);
 
@@ -219,13 +227,15 @@ GLuint loadDDS(const char * imagepath, unsigned int& _w, unsigned int& _h){
 	return textureID;
 }
 
-GLuint loadData(void* _data, size_t _size, size_t _width, size_t _height)
+GLuint loadData(void* _data, bool hasAlp, size_t _width, size_t _height)
 {
-	assert(_size == _height*_width * 3 && "size is not right!");
 	GLuint textureID;
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
+	if (hasAlp)
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, _data);
+	else 
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_RGB, GL_UNSIGNED_BYTE, _data);
 
 	setTextureParameteri();
 	return textureID;

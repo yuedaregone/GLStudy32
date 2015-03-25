@@ -18,6 +18,7 @@
 #include "Sprite.h"
 #include "GLFilter.h"
 #include "pic.h"
+#include "png.h"
 
 void calculate_fps()
 {
@@ -82,7 +83,7 @@ int main(void)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
-	
+		
 	//MGraphicsProtocol* glDraw = new MDrawTextureBox(); //gl draw class
 	//glDraw->shaderInit();
 	//glDraw->drawInit();
@@ -98,15 +99,22 @@ int main(void)
 	//sp1->setScale(1.5f, 2.0f);
 	//sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
 
-	Sprite* sp = Sprite::createWithBMP("texture.bmp");//createWithDDS("texture.dds");
+	//Sprite* sp = Sprite::createWithBMP("texture.bmp");//createWithDDS("texture.dds");
+	Sprite* sp = Sprite::createWithPNG("texture.png");
 	sp->setPosition(150, 150);
+
+	Sprite* sp0 = Sprite::createWithBMP("texture.bmp");
+	sp0->setPosition(32, 268);
+	sp0->setScale(0.5f);
+	//sp0->setRotation(180.0f);
 
 	GLFilterSpark* filter = new GLFilterSpark();
 	filter->initFilter();	
 	sp->setFilter(filter);
+	sp0->setFilter(filter);
 
 
-	Sprite* sp1 = Sprite::createWithData(ImageData::imgPic_1, 128*128*3, 128, 128);
+	Sprite* sp1 = Sprite::createWithData(ImageData::imgPic_1, false, 128, 128);
 	sp1->setScale(0.5f);
 	sp1->setPosition(32, 32);
 	//sp1->setFilter(filter);
@@ -129,6 +137,7 @@ int main(void)
 		//sp1->draw();
 		filter->setSparkOffset(temp);		
 		sp->draw();
+		sp0->draw();
 		sp1->draw();
 		if (temp > 1.2f)
 		{

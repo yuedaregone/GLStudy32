@@ -13,7 +13,7 @@ GLuint loadBMP_custom(const char * imagepath, unsigned int &width, unsigned int 
 GLuint loadDDS(const char * imagepath, unsigned int& _w, unsigned int& _h);
 
 // Load Data
-GLuint loadData(void* _data, size_t _size, size_t _width, size_t _height);
+GLuint loadData(void* _data, bool hasAlp, size_t _width, size_t _height);
 
 //set testure 
 void setTextureParameteri();

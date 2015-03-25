@@ -4,6 +4,7 @@
 #include "LuaConfig.h"
 #include "GLFilterMgr.h"
 #include "GLFilter.h"
+#include "MImage.h"
 
 Sprite* Sprite::createWithBMP(const char* fileName)
 {
@@ -20,12 +21,27 @@ Sprite* Sprite::createWithBMP(const char* fileName)
 	return pRet;
 }
 
-Sprite* Sprite::createWithData(void* _data, size_t _size, size_t _width, size_t _height)
+Sprite* Sprite::createWithPNG(const char* fileName)
 {
 	Sprite* pRet = new Sprite();
 	if (pRet)
 	{
-		pRet->initWithData(_data, _size, _width, _height);
+		pRet->initWithPNG(fileName);
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+	}
+	return pRet;
+}
+
+Sprite* Sprite::createWithData(void* _data, bool hasAlp, size_t _width, size_t _height)
+{
+	Sprite* pRet = new Sprite();
+	if (pRet)
+	{
+		pRet->initWithData(_data, hasAlp, _width, _height);
 	}
 	else
 	{
@@ -69,12 +85,20 @@ void Sprite::initWithBMP(const char* fileName)
 	m_texture = loadBMP_custom(fileName, m_w, m_h);	
 }
 
-void Sprite::initWithData(void* _data, size_t _size, size_t _width, size_t _height)
+void Sprite::initWithPNG(const char* fileName)
+{	
+	MImage image;
+	image.initWithFile(fileName, MImage::typePNG);		
+	initWithData(image.getData(), image.isHasAlpha(), image.getWidth(), image.getHeight());
+}
+
+void Sprite::initWithData(void* _data, bool hasAlp, size_t _width, size_t _height)
 {
 	init();
-	m_texture = loadData(_data, _size, _width, _height);
+
 	m_w = _width;
 	m_h = _height;
+	m_texture = loadData(_data, hasAlp, m_w, m_h);
 }
 
 void Sprite::initWithDDS(const char* fileName)
@@ -158,7 +182,7 @@ void Sprite::initVertex()
 {
 	glGenBuffers(1, &m_vertexId);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexId);
-	static const GLfloat g_vertex_data[] = {
+	const GLfloat g_vertex_data[] = {
 		-1.0f, 1.0f, 1.0f, //front
 		-1.0f, -1.0f, 1.0f,
 		1.0f, -1.0f, 1.0f,
@@ -170,16 +194,16 @@ void Sprite::initVertex()
 }
 
 void Sprite::initTextureCood()
-{
+{	
 	glGenBuffers(1, &m_textureCoodId);
 	glBindBuffer(GL_ARRAY_BUFFER, m_textureCoodId);
-	static const GLfloat g_texture_cood[] = {
-		0.000000f, 1.000000f,
+	const GLfloat g_texture_cood[] = {
 		0.000000f, 0.000000f,
-		1.000000f, 0.000000f,
-		1.000000f, 1.000000f,
 		0.000000f, 1.000000f,
-		1.000000f, 0.000000f
+		1.000000f, 1.000000f,
+		1.000000f, 0.000000f,
+		0.000000f, 0.000000f,
+		1.000000f, 1.000000f
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_texture_cood), g_texture_cood, GL_STATIC_DRAW);
 }
@@ -230,3 +254,4 @@ void Sprite::draw()
 	m_filter->render(this);
 	//glDisable(GL_SCISSOR_TEST);
 }
+
