@@ -58,4 +58,19 @@ private:
 	glm::vec4 m_sparkColor;
 };
 
+class GLFilterSingle : public GLFilter
+{
+public:
+	virtual void initFilter();
+	GLint getVertexPositionLoc() { return m_vertexPosition; }
+	GLint getMVPLoc() { return m_MVP; }
+	GLint getColorLoc() { return m_colorEx; }
+	GLint getPosSizeLoc() { return m_posSize; }
+public:
+	GLFilterSingle() :GLFilter(){}
+	~GLFilterSingle() {}
+private:
+	GLint m_posSize;	
+};
+
 #endif

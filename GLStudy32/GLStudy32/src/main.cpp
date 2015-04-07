@@ -19,6 +19,7 @@
 #include "GLFilter.h"
 #include "pic.h"
 #include "png.h"
+#include "GLDraw.h"
 
 void calculate_fps()
 {
@@ -118,6 +119,11 @@ int main(void)
 	sp1->setScale(0.5f);
 	sp1->setPosition(32, 32);
 	//sp1->setFilter(filter);
+
+	GLDraw drawNode;
+	drawNode.initGLDraw();
+	drawNode.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+	drawNode.setPointSize(1.5f);
 	
 	float temp = -1.2f;
 
@@ -135,10 +141,12 @@ int main(void)
 		//glDraw->drawUpdate(); //gl draw update
 		//sp->draw();
 		//sp1->draw();
-		filter->setSparkOffset(temp);		
-		sp->draw();
-		sp0->draw();
-		sp1->draw();
+		drawNode.drawPoint(-10, -10);
+
+		//filter->setSparkOffset(temp);		
+		//sp->draw();
+		//sp0->draw();
+		//sp1->draw();
 		if (temp > 1.2f)
 		{
 			temp = -1.2f;

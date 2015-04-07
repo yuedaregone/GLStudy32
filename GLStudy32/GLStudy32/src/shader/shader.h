@@ -2,6 +2,7 @@
 #define __GL_SHADER_H__
 #include <GL/glew.h>
 #include <gl/gl.h>
+extern const GLchar* char_shader_color_draw_vertex;
 extern const GLchar* char_shader_color_vertex;
 extern const GLchar* char_shader_color_frag;
 

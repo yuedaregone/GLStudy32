@@ -103,3 +103,14 @@ void GLFilterSpark::setSparkColor(float r, float g, float b)
 {
 	m_sparkColor = glm::vec4(r, g, b, 1.0f);
 }
+
+/**********************************GLFilterSingle**************************************/
+
+void GLFilterSingle::initFilter()
+{
+	m_iProgram = loadShaders(char_shader_color_draw_vertex, char_shader_color_frag);
+	m_vertexPosition = glGetAttribLocation(m_iProgram, "vertexPosition_modelspace");
+	m_MVP = glGetUniformLocation(m_iProgram, "MVP");	
+	m_colorEx = glGetUniformLocation(m_iProgram, "vertexColor");
+	m_posSize = glGetUniformLocation(m_iProgram, "pointSize");
+}

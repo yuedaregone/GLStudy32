@@ -84,6 +84,7 @@
     <ClCompile Include="src\data\pic_sb.cpp" />
     <ClCompile Include="src\fliter\GLFilter.cpp" />
     <ClCompile Include="src\fliter\GLFilterMgr.cpp" />
+    <ClCompile Include="src\GLDraw.cpp" />
     <ClCompile Include="src\GLShaderProgram.cpp" />
     <ClCompile Include="src\GLShaderProgramMgr.cpp" />
     <ClCompile Include="src\GLSprite.cpp" />
@@ -101,6 +102,7 @@
     <ClInclude Include="src\data\pic.h" />
     <ClInclude Include="src\fliter\GLFilter.h" />
     <ClInclude Include="src\fliter\GLFilterMgr.h" />
+    <ClInclude Include="src\GLDraw.h" />
     <ClInclude Include="src\GLShaderProgram.h" />
     <ClInclude Include="src\GLShaderProgramMgr.h" />
     <ClInclude Include="src\GLSprite.h" />
@@ -111,6 +113,7 @@
     <ClInclude Include="src\MGraphicsProtocol.h" />
     <ClInclude Include="src\MObjActionProtocol.h" />
     <ClInclude Include="src\shader\shader.h" />
+    <ClInclude Include="src\shader\shader_color_draw_vertex.h" />
     <ClInclude Include="src\shader\shader_color_frag.h" />
     <ClInclude Include="src\shader\shader_color_vertex.h" />
     <ClInclude Include="src\shader\shader_texture_blur_frag.h" />

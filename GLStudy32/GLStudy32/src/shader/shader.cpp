@@ -59,6 +59,8 @@ GLuint loadShaders(const GLchar* vertexStr, const GLchar* fragmentStr)
 	return programId;
 }
 
+const GLchar* char_shader_color_draw_vertex =
+#include "shader_color_draw_vertex.h"
 const GLchar* char_shader_color_vertex =
 #include "shader_color_vertex.h"
 const GLchar* char_shader_color_frag =

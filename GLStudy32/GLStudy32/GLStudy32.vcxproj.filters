@@ -71,6 +71,9 @@
     <ClCompile Include="src\data\MImage.cpp">
       <Filter>src\data</Filter>
     </ClCompile>
+    <ClCompile Include="src\GLDraw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\texture.hpp">
@@ -141,6 +144,12 @@
     </ClInclude>
     <ClInclude Include="src\data\MImage.h">
       <Filter>src\data</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GLDraw.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_color_draw_vertex.h">
+      <Filter>src\shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
