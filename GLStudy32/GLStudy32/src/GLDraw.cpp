@@ -46,7 +46,7 @@ void GLDraw::drawPoint(int x, int y)
 	m_filter->use();	
 	int w, h;
 	g_pLuaConfig->getWindowSize(w, h);
-	float pos[2] = { (float)x/w, (float)y/h};
+	float pos[3] = {20,30, 300.0};//(float)x/w, (float)y/h};
 	glUniformMatrix4fv(m_filter->getMVPLoc(), 1, GL_FALSE, &m_mvp[0][0]);
 	//set size
 	glUniform1f(m_filter->getPosSizeLoc(), m_posSize);
@@ -54,6 +54,9 @@ void GLDraw::drawPoint(int x, int y)
 	glUniform4f(m_filter->getColorLoc(), m_drawColor.r, m_drawColor.g, m_drawColor.b, m_drawColor.a);
 
 	GLint _verPos = m_filter->getVertexPositionLoc();	
-	glVertexAttribPointer(_verPos, 2, GL_FLOAT, GL_FALSE, 0, pos);
+		
+	//glEnableVertexAttribArray(_verPos);
+	glVertexAttribPointer(_verPos, 3, GL_FLOAT, GL_FALSE, 0, pos);	
 	glDrawArrays(GL_POINTS, 0, 1);
+	//glDisableVertexAttribArray(_verPos);
 }

@@ -104,6 +104,28 @@ void GLFilterSpark::setSparkColor(float r, float g, float b)
 	m_sparkColor = glm::vec4(r, g, b, 1.0f);
 }
 
+/**********************************GLFilterUV**************************************/
+
+void GLFilterUV::initFilter()
+{
+	m_iProgram = loadShaders(char_shader_texture_vertex, char_shader_texture_uv_animation_frag);
+	initShaderVarible();
+	m_uvOffsetLoc = glGetUniformLocation(m_iProgram, "offsetUV");
+}
+
+void GLFilterUV::render(Sprite* _sp)
+{
+	glUniform1f(m_uvOffsetLoc, m_uvOffset);
+	GLFilter::render(_sp);
+}
+
+void GLFilterUV::setUVOffset(float _offset)
+{
+	_offset = _offset < -1.0f ? -1.0f : _offset;
+	_offset = _offset > 1.0f ? 1.0f : _offset;
+	m_uvOffset = _offset;
+}
+
 /**********************************GLFilterSingle**************************************/
 
 void GLFilterSingle::initFilter()

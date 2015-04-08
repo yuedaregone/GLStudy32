@@ -29,7 +29,7 @@ local texture_shader = {
     fragment_str = "\
         #version 120                                            \n\
         varying vec2 UV;                                        \n\
-	uniform vec4 frag_color;				\n\
+	    uniform vec4 frag_color;				\n\
         uniform sampler2D myTextureSampler;                     \n\
         void main(){                                            \n\
             vec4 texColor = texture2D(myTextureSampler,UV);	\n\
@@ -64,7 +64,7 @@ local texture_shader = {
 	    gl_FragColor = frag_color*texColor+color;		\n\
         }                                                       \n\
     ",
-    fragment_str_test = "\
+    fragment_str_blur = "\
         #version 120                                                    \n\
         varying vec2 UV;                                                \n\
         uniform sampler2D myTextureSampler;                             \n\
@@ -86,6 +86,18 @@ local texture_shader = {
 	    gl_FragColor = (samplerColorX+samplerColorY)*0.5;				\n\
         }                                                               \n\
     ",
+    fragment_uv_test = "\
+        #version 120                                            \n\
+        varying vec2 UV;                                        \n\
+        uniform vec4 frag_color;                                \n\
+        uniform sampler2D myTextureSampler;                     \n\
+        uniform float offsetUV = 0.5;                           \n\
+        void main(){                                            \n\
+            vec2 targetUV = UV + vec2(0,offsetUV);                 \n\
+            vec4 texColor = texture2D(myTextureSampler,targetUV); \n\
+            gl_FragColor = texColor*frag_color;         \n\
+        }                                                       \n\
+    ",  
 }
 
 function getVertexShader()
@@ -93,5 +105,5 @@ function getVertexShader()
 end
 
 function getFragmentShader()
-    return texture_shader.fragment_str_test
+    return texture_shader.fragment_uv_test
 end

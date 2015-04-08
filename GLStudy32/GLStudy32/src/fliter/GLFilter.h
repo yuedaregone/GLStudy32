@@ -3,6 +3,7 @@
 #include <GL/glew.h>
 #include "glm/glm.hpp"
 class Sprite;
+class GLFilterMgr;
 class GLFilter
 {
 public:
@@ -11,7 +12,7 @@ public:
 	virtual void render(Sprite* _sp);
 	void retain();
 	void release();
-public:
+protected:
 	GLFilter();
 	virtual ~GLFilter() {}
 protected:
@@ -25,13 +26,14 @@ protected:
 	GLint m_colorEx;	
 private:
 	unsigned int m_reference;
+	friend class GLFilterMgr;
 };
 
 class GLFilterGray :public GLFilter
 {
 public:
 	virtual void initFilter();	
-public:
+protected:
 	GLFilterGray() :GLFilter() {};
 	~GLFilterGray() {}
 };
@@ -46,7 +48,7 @@ public:
 	float getSparkWidth() { return m_width; }
 	float getSparkOffset() { return m_offset; }
 	void setSparkColor(float r, float g, float b);
-public:
+protected:
 	GLFilterSpark() :GLFilter(), m_width(0.2f), m_offset(0.0f), m_sparkColor(glm::vec4(1.0)){};
 	~GLFilterSpark() {}
 private:
@@ -56,6 +58,20 @@ private:
 	float m_width; //spark width
 	float m_offset; //spark offset
 	glm::vec4 m_sparkColor;
+};
+
+class GLFilterUV :public GLFilter
+{
+public:
+	virtual void initFilter();
+	virtual void render(Sprite* _sp);
+	void setUVOffset(float _offset);
+public:
+	GLFilterUV() :GLFilter(), m_uvOffset(0.0f){};
+	~GLFilterUV() {}
+private:
+	GLint m_uvOffsetLoc;
+	float m_uvOffset;
 };
 
 class GLFilterSingle : public GLFilter

@@ -46,7 +46,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;.\src\fliter;.\src\shader;.\src\data;.\src;.\GL;.\glm\include;..\liblua\lua;..\libpng\libpng;..\zlib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\src\fliter;.\src\shader;.\src\data;.\src;.\src\tool;.\GL;.\glm\include;..\liblua\lua;..\libpng\libpng;..\zlib\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;GLEW_STATIC;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -91,6 +91,7 @@
     <ClCompile Include="src\LuaConfig.cpp" />
     <ClCompile Include="src\MActionSimple.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MDirector.cpp" />
     <ClCompile Include="src\MDrawColorBox.cpp" />
     <ClCompile Include="src\MDrawTextureBox.cpp" />
     <ClCompile Include="src\shader\shader.cpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="src\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="shader_texture_uv_animation_frag.h" />
     <ClInclude Include="src\data\MImage.h" />
     <ClInclude Include="src\data\pic.h" />
     <ClInclude Include="src\fliter\GLFilter.h" />
@@ -108,6 +110,7 @@
     <ClInclude Include="src\GLSprite.h" />
     <ClInclude Include="src\LuaConfig.h" />
     <ClInclude Include="src\MActionSimple.h" />
+    <ClInclude Include="src\MDirector.h" />
     <ClInclude Include="src\MDrawColorBox.h" />
     <ClInclude Include="src\MDrawTextureBox.h" />
     <ClInclude Include="src\MGraphicsProtocol.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="src\shader\shader_texture_vertex.h" />
     <ClInclude Include="src\Sprite.h" />
     <ClInclude Include="src\texture.hpp" />
+    <ClInclude Include="src\tool\MSingleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

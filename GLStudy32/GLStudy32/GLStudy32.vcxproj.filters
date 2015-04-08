@@ -18,6 +18,9 @@
     <Filter Include="src\fliter">
       <UniqueIdentifier>{bee48974-3a24-45b4-a569-dc455b316e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\tool">
+      <UniqueIdentifier>{3519dbfb-b0ea-4abb-a252-6d3d31eadbb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -72,6 +75,9 @@
       <Filter>src\data</Filter>
     </ClCompile>
     <ClCompile Include="src\GLDraw.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MDirector.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -149,6 +155,15 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\shader\shader_color_draw_vertex.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MDirector.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tool\MSingleton.h">
+      <Filter>src\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_texture_uv_animation_frag.h">
       <Filter>src\shader</Filter>
     </ClInclude>
   </ItemGroup>

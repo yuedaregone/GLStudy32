@@ -11,6 +11,7 @@ extern const GLchar* char_shader_texture_frag;
 extern const GLchar* char_shader_texture_blur_frag;
 extern const GLchar* char_shader_texture_gray_frag;
 extern const GLchar* char_shader_texture_spark_frag;
+extern const GLchar* char_shader_texture_uv_animation_frag;
 
 GLuint loadShaders(const GLchar* vertexStr, const GLchar* fragmentStr);
 #endif

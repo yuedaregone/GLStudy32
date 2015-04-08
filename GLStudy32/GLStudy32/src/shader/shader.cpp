@@ -76,3 +76,5 @@ const GLchar* char_shader_texture_gray_frag =
 #include "shader_texture_gray_frag.h"
 const GLchar* char_shader_texture_spark_frag =
 #include "shader_texture_spark_frag.h"
+const GLchar* char_shader_texture_uv_animation_frag =
+#include "shader_texture_uv_animation_frag.h"
