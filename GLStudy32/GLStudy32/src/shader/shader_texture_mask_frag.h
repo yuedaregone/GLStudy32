@@ -3,8 +3,6 @@
 varying vec2 UV;                                        \n\
 uniform vec4 frag_color;								\n\
 uniform sampler2D myTextureSampler;                     \n\
-uniform float offset = 0.0;								\n\
-uniform float width = 0.2;								\n\
 uniform vec4 u_color = vec4(1.0, 0.0, 1.0, 1.0);		\n\
 void main(){                                            \n\
 	vec4 texColor = texture2D(myTextureSampler,UV);		\n\

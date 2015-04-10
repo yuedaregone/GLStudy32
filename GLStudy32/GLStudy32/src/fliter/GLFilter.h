@@ -12,7 +12,7 @@ public:
 	virtual void render(Sprite* _sp);
 	void retain();
 	void release();
-protected:
+public:
 	GLFilter();
 	virtual ~GLFilter() {}
 protected:
@@ -25,15 +25,14 @@ protected:
 	GLint m_sampler;
 	GLint m_colorEx;	
 private:
-	unsigned int m_reference;
-	friend class GLFilterMgr;
+	unsigned int m_reference;	
 };
 
 class GLFilterGray :public GLFilter
 {
 public:
 	virtual void initFilter();	
-protected:
+public:
 	GLFilterGray() :GLFilter() {};
 	~GLFilterGray() {}
 };
@@ -47,8 +46,8 @@ public:
 	void setSparkOffset(float _offset) { m_offset = _offset; }
 	float getSparkWidth() { return m_width; }
 	float getSparkOffset() { return m_offset; }
-	void setSparkColor(float r, float g, float b);
-protected:
+	void setSparkColor(float r, float g, float b,float a);
+public:
 	GLFilterSpark() :GLFilter(), m_width(0.2f), m_offset(0.0f), m_sparkColor(glm::vec4(1.0)){};
 	~GLFilterSpark() {}
 private:

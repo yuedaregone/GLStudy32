@@ -29,27 +29,28 @@ void MDirector::init()
 	//sp->setScale(0.5f, 1.0f);
 	//sp->setRotation(90);
 
-	sp1 = GLSprite::createWithBMP("texture.bmp", 50, -50);
-	sp1->setPosition(25, 25);
-	sp1->setScale(0.5f, 0.5f);
+	//sp1 = GLSprite::createWithBMP("texture.bmp", 50, -50);
+	//sp1->setPosition(25, 25);
+	//sp1->setScale(0.5f, 0.5f);
 	//sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 	//Sprite* sp = Sprite::createWithBMP("texture.bmp");//createWithDDS("texture.dds");
 	sp = Sprite::createWithPNG("texture1.png");
 	sp->setPosition(150, 150);
 
-	fliter = new GLFilterUV();
-	fliter->initFilter();
-	sp->setFilter(fliter);
+	//fliter = new GLFilterUV();
+	//fliter->initFilter();
+	//sp->setFilter(fliter);
 
 	Sprite* sp0 = Sprite::createWithBMP("texture.bmp");
 	sp0->setPosition(32, 268);
 	sp0->setScale(0.5f);
 	//sp0->setRotation(180.0f);
 
-	//GLFilterSpark* filter = new GLFilterSpark();
-	//filter->initFilter();
-	//sp->setFilter(filter);
+	GLFilterSpark* filter = new GLFilterSpark();
+	filter->initFilter();
+	filter->setSparkColor(1.0f, 0.0f, 1.0f, 1.0f);
+	sp->setFilter(filter);
 	//sp0->setFilter(filter);
 
 
@@ -73,9 +74,9 @@ void MDirector::mainLoop()
 	//glDraw->actionUpdate();
 	//glDraw->drawUpdate(); //gl draw update
 	sp->draw();
-	sp1->draw();
+	//sp1->draw();
 
-	fliter->setUVOffset(tmp);
+	//fliter->setUVOffset(tmp);
 	if (tmp > 1.0f)
 	{
 		tmp = 0.02f;

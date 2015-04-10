@@ -8,6 +8,7 @@ typedef enum _FilterType
 	e_fliter_default,
 	e_fliter_gray,
 	e_fliter_spark,
+	e_fliter_uv,
 	e_fliter_blur,
 	e_fliter_unknow
 }FilterType;

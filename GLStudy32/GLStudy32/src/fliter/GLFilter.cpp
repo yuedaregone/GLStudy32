@@ -99,9 +99,9 @@ void GLFilterSpark::render(Sprite* _sp)
 	GLFilter::render(_sp);
 }
 
-void GLFilterSpark::setSparkColor(float r, float g, float b)
+void GLFilterSpark::setSparkColor(float r, float g, float b, float a)
 {
-	m_sparkColor = glm::vec4(r, g, b, 1.0f);
+	m_sparkColor = glm::vec4(r, g, b, a);
 }
 
 /**********************************GLFilterUV**************************************/

@@ -80,6 +80,9 @@
     <ClCompile Include="src\MDirector.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\ClipSprite.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\texture.hpp">
@@ -165,6 +168,12 @@
     </ClInclude>
     <ClInclude Include="shader_texture_uv_animation_frag.h">
       <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shader\shader_texture_mask_frag.h">
+      <Filter>src\shader</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ClipSprite.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

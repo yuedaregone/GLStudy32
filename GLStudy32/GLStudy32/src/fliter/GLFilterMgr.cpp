@@ -22,7 +22,31 @@ GLFilter* GLFilterMgr::getFilterByType(FilterType _type)
 	{
 		return it->second;
 	}
-
+	GLFilter* filter = NULL;
+	switch (_type)
+	{
+	case e_fliter_gray:
+		filter = new GLFilterGray();
+		break;
+	case e_fliter_spark:
+		filter = new GLFilterSpark();
+		break;
+	case e_fliter_uv:
+		filter = new GLFilterUV();
+		break;
+	case e_fliter_blur:
+		//filter = new GLFilter
+		break;
+	default:
+		return m_defaultFilter;
+		break;
+	}
+	if (filter){
+		filter->initFilter();
+		m_fliters[_type] = filter;
+	}
+		
+	return filter;
 }
 
 void GLFilterMgr::addFilter(FilterType _type, GLFilter* _filter)

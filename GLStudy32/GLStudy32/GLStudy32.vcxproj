@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ClipSprite.cpp" />
     <ClCompile Include="src\data\MImage.cpp" />
     <ClCompile Include="src\data\pic.cpp" />
     <ClCompile Include="src\data\pic_2.cpp" />
@@ -100,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shader_texture_uv_animation_frag.h" />
+    <ClInclude Include="src\ClipSprite.h" />
     <ClInclude Include="src\data\MImage.h" />
     <ClInclude Include="src\data\pic.h" />
     <ClInclude Include="src\fliter\GLFilter.h" />
@@ -122,6 +124,7 @@
     <ClInclude Include="src\shader\shader_texture_blur_frag.h" />
     <ClInclude Include="src\shader\shader_texture_frag.h" />
     <ClInclude Include="src\shader\shader_texture_gray_frag.h" />
+    <ClInclude Include="src\shader\shader_texture_mask_frag.h" />
     <ClInclude Include="src\shader\shader_texture_spark_frag.h" />
     <ClInclude Include="src\shader\shader_texture_vertex.h" />
     <ClInclude Include="src\Sprite.h" />
