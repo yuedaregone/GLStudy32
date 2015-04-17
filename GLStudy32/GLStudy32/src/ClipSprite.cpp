@@ -14,4 +14,5 @@ ClipSprite* ClipSprite::createClipSprite(int _w, int _h)
 
 bool ClipSprite::initClipSprite(int _w, int _h)
 {
+	return false;
 }
