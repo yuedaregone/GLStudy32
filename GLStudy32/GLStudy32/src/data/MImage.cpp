@@ -195,5 +195,5 @@ size_t MImage::getDataSize()
 	{
 		pixelLen = 4;
 	}
-	return m_nHeight*m_nHeight * pixelLen;
+	return m_nHeight*m_nWidth * pixelLen;
 }

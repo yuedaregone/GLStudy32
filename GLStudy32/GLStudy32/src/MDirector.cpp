@@ -35,7 +35,7 @@ void MDirector::init()
 	//sp1->setColor(1.0f, 0.0f, 1.0f, 1.0f);
 
 	//Sprite* sp = Sprite::createWithBMP("texture.bmp");//createWithDDS("texture.dds");
-	sp = Sprite::createWithPNG("texture1.png");
+	sp = Sprite::createWithData(ImageData::imgPic_1, false, 128, 128);
 	sp->setPosition(150, 150);
 
 	//fliter = new GLFilterUV();
@@ -50,6 +50,7 @@ void MDirector::init()
 	GLFilterSpark* filter = new GLFilterSpark();
 	filter->initFilter();
 	filter->setSparkColor(1.0f, 0.0f, 1.0f, 1.0f);
+	//filter->setSparkOffset()
 	sp->setFilter(filter);
 	//sp0->setFilter(filter);
 
@@ -88,8 +89,8 @@ void MDirector::mainLoop()
 	//drawNode.drawPoint(100, 110);
 
 	//filter->setSparkOffset(temp);		
-	//sp->draw();
-	//sp0->draw();
+//	sp->draw();
+//	sp0->draw();
 	//sp1->draw();
 	/*if (temp > 1.2f)
 	{
